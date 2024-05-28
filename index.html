@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Test</title>
+  <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+  <link href="./output.css" rel="stylesheet">
+</head>
+<body class="antialiased" x-data="{'darkMode': false}" x-init="
+darkMode = JSON.parse(localStorage.getItem('darkMode'));
+$watch('darkMode', value => localStorage.setItem('darkMode', JSON.stringify(value)))">
+  <div :class="{'dark': darkMode === true}">
+    <div class="min-h-screen text-gray-800 bg-white dark:bg-gray-800 dark:text-gray-100">
+      <div class="flex flex-col space-y-1 m-auto max-w-[1440px] pt-8">
+        <div class="fixed  z-10 flex translate-y-16 justify-end items-center space-x-2">
+          <span class="text-sm text-gray-300 dark:text-gray-200"></span>
+          <label for="toggle"
+            class="w-9 h-5 flex items-center bg-gray-300 rounded-full p-1 cursor-pointer duration-300 ease-in-out dark:bg-gray-400">
+            <div
+              class="toggle-dot bg-white px-2 w-4 h-4 rounded-full shadow-md transform duration-300 ease-in-out dark:translate-x-3">
+            </div>
+          </label>
+          <span class="text-sm text-gray-400 dark:text-white"></span>
+          <input id="toggle" type="checkbox" class="hidden" :value="darkMode" @change="darkMode = !darkMode" />
+        </div>
+        <div x-data="{navOpen: false, scrolledFromTop: false}"
+            x-init="window.pageYOffset >= 50 ? scrolledFromTop = true : scrolledFromTop = false"
+            @scroll.window="window.pageYOffset >= 50 ? scrolledFromTop = true : scrolledFromTop = false" :class="{
+                  'overflow-hidden': navOpen,
+                  'overflow-scroll': !navOpen
+                  }">
+            <header class="-top-4 z-40
+                  fixed
+                  max-w-[1440px]
+                  mx-auto
+                  w-full
+                  bg-[#535059] 
+                  flex
+                  justify-between
+                  items-center
+                  px-2
+                  md:px-12
+                  h-24">
+              <h6 class="text-white px-4 xl:ml-24 lg:ml-24 md:ml-16 sm:ml-8 xs:ml-8 italic text-2xl">Wladder</h6>
+              <nav class="md:mr-40">
+                <button class="md:hidden" @click="navOpen = !navOpen">
+                  <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-white" fill="none" viewBox="0 0 24 24"
+                    stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+                  </svg>
+                </button>
+                <ul class=" 
+                  fixed
+                  left-0
+                  right-0
+                  min-h-screen
+                  px-4
+                  pt-8
+                  space-y-4
+                  bg-[#535059] 
+                  text-white
+                  transform
+                  transition
+                  duration-300
+                  translate-x-full
+                  md:relative md:flex md:space-x-10 md:min-h-0 md:px-0 md:py-0 md:space-y-0 md:translate-x-0
+                  " :class="{'translate-x-full': !navOpen}" :class="{'translate-x-0': navOpen}">
+                  <li class="">
+                    <a href="#" @click="navOpen = false">Home</a>
+                  </li>
+                  <li class="#">
+                    <a href="#features" @click="navOpen = false">Features</a>
+                  </li>
+                  <li>
+                    <a href="#about" @click="navOpen = false">About</a>
+                  </li>
+                  <li>
+                    <a href="#contact" @click="navOpen = false">Contact</a>
+                  </li>
+                </ul>
+              </nav>
+            </header>
+          </div>
+      </div>
+    </div>
+  </div>
+  
+</body>
+</html>
